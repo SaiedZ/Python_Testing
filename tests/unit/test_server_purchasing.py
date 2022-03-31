@@ -1,6 +1,6 @@
 import pytest
 
-import server
+import server, config
 from tests.conftest import client
 
 
@@ -37,6 +37,8 @@ class TestPurchasing:
         """
         mocker.patch.object(server, "clubs", self.mocked_clubs)
         mocker.patch.object(server, "competitions", self.mocked_competitions)
+        mocker.patch.object(config, "MAX_BOOKABLE_PLACES", 100)
+        mocker.patch.object(config, "POINTS_PER_PLACE", 1)
 
         club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
         places_to_book = 10
@@ -67,6 +69,8 @@ class TestPurchasing:
         """
         mocker.patch.object(server, "clubs", self.mocked_clubs)
         mocker.patch.object(server, "competitions", self.mocked_competitions)
+        mocker.patch.object(config, "MAX_BOOKABLE_PLACES", 100)
+        mocker.patch.object(config, "POINTS_PER_PLACE", 1)
 
         club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
         places_to_book_more_than_points = 20
@@ -96,6 +100,36 @@ class TestPurchasing:
         assert (
             data_not_enough_places.find(
                 "You can&#39;t book more places than available ! "
+            )
+            != -1
+        )
+
+    def test_purshasing_should_not_work_if_places_are_more_than_allowed(
+        self, client, mocker
+    ):
+        """
+        Testing if purshasing doesn't work if a club want to book
+        more than the allowed number of places per club
+        """
+        mocker.patch.object(server, "clubs", self.mocked_clubs)
+        mocker.patch.object(server, "competitions", self.mocked_competitions)
+
+        club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
+
+        response = client.post(
+            "/purchasePlaces",
+            data={
+                "competition": competition["name"],
+                "club": club["name"],
+                "places": config.MAX_BOOKABLE_PLACES*2,
+            },
+        )
+
+        data = response.data.decode()
+
+        assert (
+            data.find(
+                f"You are not allowed to purchase more than {config.MAX_BOOKABLE_PLACES} places ! "
             )
             != -1
         )
