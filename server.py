@@ -1,4 +1,7 @@
 import json
+import math
+
+import config
 from flask import Flask,render_template,request,redirect,flash,url_for
 
 
@@ -39,8 +42,14 @@ def showSummary():
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
+
     if foundClub and foundCompetition:
-        return render_template('booking.html',club=foundClub,competition=foundCompetition)
+        max_places_to_book = min(
+            math.floor(int(foundClub['points']) / config.POINTS_PER_PLACE),
+            int(foundCompetition['numberOfPlaces']),
+            config.MAX_BOOKABLE_PLACES,
+        )
+        return render_template('booking.html',club=foundClub,competition=foundCompetition,max_places_to_book=max_places_to_book)
     else:
         flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
@@ -52,22 +61,26 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    booking_error = False
 
-    if placesRequired > int(club['points']):
+    if placesRequired > config.MAX_BOOKABLE_PLACES:
+        flash(f"You are not allowed to purchase more than {config.MAX_BOOKABLE_PLACES} places ! ")
+        return render_template('booking.html', club=club, competition=competition)
+
+    max_places_to_book = math.floor(int(club['points']) / config.POINTS_PER_PLACE)
+
+    if placesRequired > max_places_to_book:
         flash("You don't have enough points ! ")
-        booking_error = True
+        return render_template('booking.html', club=club, competition=competition)
 
     if placesRequired > int(competition['numberOfPlaces']):
         flash("You can't book more places than available ! ")
-        booking_error = True
-
-    if booking_error:
         return render_template('booking.html', club=club, competition=competition)
 
-    club['points'] = int(club['points'])-placesRequired
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+    club['points'] = int(club['points']) - placesRequired
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+
     flash('Great-booking complete!')
+
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
