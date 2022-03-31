@@ -6,7 +6,6 @@ from tests.conftest import client
 
 class TestPurchasing:
     def setup_method(self, method):
-        self.app = server.app
         self.mocked_clubs = [
             {"name": "Simp Ly", "email": "john@simplylift.co", "points": "13"},
         ]
@@ -22,11 +21,6 @@ class TestPurchasing:
                 "numberOfPlaces": "12",
             },
         ]
-        self.app_context = self.app.test_request_context()
-        self.app_context.push()  # push it
-
-    def tearDown(self):
-        self.context.pop()  # pop it
 
     def test_purshasing_should_reduce_places_and_club_points(
             self, client, mocker
