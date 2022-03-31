@@ -7,10 +7,15 @@
 <body>
     <h2>{{competition['name']}}</h2>
     Places available: {{competition['numberOfPlaces']}}
+    <br>
+
+    You con't book more than {{max_places_to_book}}
+    <br>
+
     <form action="/purchasePlaces" method="post">
         <input type="hidden" name="club" value="{{club['name']}}">
         <input type="hidden" name="competition" value="{{competition['name']}}">
-        <label for="places">How many places?</label><input type="number" name="places" id="" min="" max="{{club['points']}}"/>
+        <label for="places">How many places?</label><input type="number" name="places" id="" min="" max="{{max_places_to_book}}"/>
         <button type="submit">Book</button>
     </form>
 
