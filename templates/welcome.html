@@ -23,14 +23,15 @@
             {{comp['name']}}<br />
             Date: {{comp['date']}}</br>
             Number of Places: {{comp['numberOfPlaces']}}
-            {%if comp['numberOfPlaces']|int >0%}
-            <a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a>
+            {% if not comp['date']|past_date %}
+                {%if comp['numberOfPlaces']|int >0%}
+                    <a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a>
+                {%endif%}
             {%endif%}
         </li>
         <hr />
         {% endfor %}
     </ul>
-    {%endwith%}
-
+    {% endwith %}
 </body>
 </html>

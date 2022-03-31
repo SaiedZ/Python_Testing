@@ -1,8 +1,21 @@
-import json
-import math
+import json, math
+from datetime import datetime
 
 import config
 from flask import Flask,render_template,request,redirect,flash,url_for
+
+
+app = Flask(__name__)
+app.secret_key = 'something_special'
+app.config.from_object('config')
+
+
+def compare_str_date_to_now(str_date):
+    datetime_object = datetime.strptime(str_date, '%Y-%m-%d %H:%M:%S')
+    return datetime_object < datetime.now()
+
+
+app.jinja_env.filters['past_date'] = compare_str_date_to_now
 
 
 def loadClubs():
@@ -17,9 +30,6 @@ def loadCompetitions():
          return listOfCompetitions
 
 
-app = Flask(__name__)
-app.secret_key = 'something_special'
-app.config.from_object('config')
 
 competitions = loadCompetitions()
 clubs = loadClubs()
