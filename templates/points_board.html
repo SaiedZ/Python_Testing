@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gudlft | Clubs points board</title>
+    </head>
+    <body>
+        <h1>GUDLFT points board</h1>
+        <p>To <a href="{{url_for('index')}}">login.</a></p>
+
+        <p>Points per place : {{ config.POINTS_PER_PLACE}} </p>
+        <p>The maximum places allowed for each club is : {{ config.MAX_BOOKABLE_PLACES }}</p>
+
+        <table width=40% border=1>
+            <thead>
+                <th>Clubs</th>
+                <th>Points</th>
+            </thead>
+            <tbody>
+                {% for club in clubs %}
+                    <tr>
+                        <td align=center style="border: 1px solid black">{{ club.name }} </td>
+                        <td align=center style="border: 1px solid black">{{ club.points }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
