@@ -72,6 +72,10 @@ def purchasePlaces():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
 
+    if compare_str_date_to_now(competition['date']):
+        flash("You can't book a place on a post-dated competition! ")
+        return render_template('booking.html', club=club, competition=competition)
+
     if placesRequired > config.MAX_BOOKABLE_PLACES:
         flash(f"You are not allowed to purchase more than {config.MAX_BOOKABLE_PLACES} places ! ")
         return render_template('booking.html', club=club, competition=competition)
