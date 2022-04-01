@@ -50,19 +50,19 @@ def showSummary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-
-    if foundClub and foundCompetition:
-        max_places_to_book = min(
-            math.floor(int(foundClub['points']) / config.POINTS_PER_PLACE),
-            int(foundCompetition['numberOfPlaces']),
-            config.MAX_BOOKABLE_PLACES,
-        )
-        return render_template('booking.html',club=foundClub,competition=foundCompetition,max_places_to_book=max_places_to_book)
-    else:
+    try:
+        foundClub = [c for c in clubs if c['name'] == club][0]
+        foundCompetition = [c for c in competitions if c['name'] == competition][0]
+    except IndexError:
         flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
+
+    max_places_to_book = min(
+        math.floor(int(foundClub['points']) / config.POINTS_PER_PLACE),
+        int(foundCompetition['numberOfPlaces']),
+        config.MAX_BOOKABLE_PLACES,
+    )
+    return render_template('booking.html',club=foundClub,competition=foundCompetition,max_places_to_book=max_places_to_book)
 
 
 @app.route('/purchasePlaces',methods=['POST'])
