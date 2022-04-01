@@ -5,6 +5,7 @@ from tests.conftest import client
 
 
 class TestPurchasing:
+
     def setup_method(self, method):
         self.mocked_clubs = [
             {"name": "Simp Ly", "email": "john@simplylift.co", "points": "13"},
@@ -17,7 +18,7 @@ class TestPurchasing:
             },
             {
                 "name": "Fall Classic",
-                "date": "2020-10-22 13:30:00",
+                "date": "2026-10-22 13:30:00",
                 "numberOfPlaces": "12",
             },
         ]
@@ -98,7 +99,7 @@ class TestPurchasing:
             != -1
         )
 
-    def test_purshasing_should_not_work_if_places_are_more_than_allowed(
+    def test_club_can_not_book_more_places_than_allowed(
         self, client, mocker
     ):
         """
@@ -124,6 +125,36 @@ class TestPurchasing:
         assert (
             data.find(
                 f"You are not allowed to purchase more than {config.MAX_BOOKABLE_PLACES} places ! "
+            )
+            != -1
+        )
+
+    def test_club_can_not_book_postdated_competition(
+        self, client, mocker
+    ):
+        """
+        Testing the purchasin view to verrify that a club
+        can't book a postdated competition
+        """
+        mocker.patch.object(server, "clubs", self.mocked_clubs)
+        mocker.patch.object(server, "competitions", self.mocked_competitions)
+
+        club, competition = self.mocked_clubs[0], self.mocked_competitions[0]
+
+        response = client.post(
+            "/purchasePlaces",
+            data={
+                "competition": competition["name"],
+                "club": club["name"],
+                "places": 1,
+            },
+        )
+
+        data = response.data.decode()
+
+        assert (
+            data.find(
+                "You can&#39;t book a place on a post-dated competition! "
             )
             != -1
         )
