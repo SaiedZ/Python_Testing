@@ -5,6 +5,7 @@ from tests.conftest import client
 
 
 class TestLogin:
+
     def setup_method(self, method):
         self.wrong_email = "admin@irontemple.com"
         self.moked_clubs = [
