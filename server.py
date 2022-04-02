@@ -90,7 +90,7 @@ def purchasePlaces():
         flash("You can't book more places than available ! ")
         return render_template('booking.html', club=club, competition=competition)
 
-    club['points'] = int(club['points']) - placesRequired
+    club['points'] = int(club['points']) - (placesRequired * config.POINTS_PER_PLACE)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
 
     flash('Great-booking complete!')
