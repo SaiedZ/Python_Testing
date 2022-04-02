@@ -36,7 +36,7 @@ class TestPurchasing:
         mocker.patch.object(config, "POINTS_PER_PLACE", 1)
 
         club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
-        places_to_book = 10
+        places_to_book = 2
         expected_remaining_places = int(competition["numberOfPlaces"]) - places_to_book
         expected_remaining_points = int(club["points"]) - places_to_book
 
