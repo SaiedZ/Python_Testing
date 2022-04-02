@@ -9,6 +9,7 @@ charset-normalizer==2.0.12
 click==8.0.4
 colorama==0.4.4
 ConfigArgParse==1.5.3
+coverage==6.3.2
 flake8==4.0.1
 Flask==2.0.3
 Flask-BasicAuth==0.2.0
@@ -39,6 +40,7 @@ pycparser==2.21
 pyflakes==2.4.0
 pyparsing==3.0.7
 pytest==7.1.1
+pytest-cov==3.0.0
 pytest-flask==1.2.0
 pytest-mock==3.7.0
 pywin32==303
