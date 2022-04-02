@@ -5,7 +5,6 @@ from tests.conftest import client
 
 
 class TestPurchasing:
-
     def setup_method(self, method):
         self.mocked_clubs = [
             {"name": "Simp Ly", "email": "john@simplylift.co", "points": "13"},
@@ -23,9 +22,7 @@ class TestPurchasing:
             },
         ]
 
-    def test_purshasing_should_reduce_places_and_club_points(
-            self, client, mocker
-            ):
+    def test_purshasing_should_reduce_places_and_club_points(self, client, mocker):
         """
         Testing if after purshasing places, the number of places and club's
         points are reduced
@@ -99,9 +96,7 @@ class TestPurchasing:
             != -1
         )
 
-    def test_club_can_not_book_more_places_than_allowed(
-        self, client, mocker
-    ):
+    def test_club_can_not_book_more_places_than_allowed(self, client, mocker):
         """
         Testing if purshasing doesn't work if a club want to book
         more than the allowed number of places per club
@@ -116,7 +111,7 @@ class TestPurchasing:
             data={
                 "competition": competition["name"],
                 "club": club["name"],
-                "places": config.MAX_BOOKABLE_PLACES*2,
+                "places": config.MAX_BOOKABLE_PLACES * 2,
             },
         )
 
@@ -129,9 +124,7 @@ class TestPurchasing:
             != -1
         )
 
-    def test_club_can_not_book_postdated_competition(
-        self, client, mocker
-    ):
+    def test_club_can_not_book_postdated_competition(self, client, mocker):
         """
         Testing the purchasin view to verrify that a club
         can't book a postdated competition
@@ -153,8 +146,5 @@ class TestPurchasing:
         data = response.data.decode()
 
         assert (
-            data.find(
-                "You can&#39;t book a place on a post-dated competition! "
-            )
-            != -1
+            data.find("You can&#39;t book a place on a post-dated competition! ") != -1
         )

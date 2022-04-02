@@ -7,7 +7,6 @@ from tests.conftest import client
 
 
 class TestBooking:
-
     def setup_method(self, method):
         self.app = server.app
         self.mocked_clubs = [
@@ -80,13 +79,14 @@ class TestBooking:
 
         assert response.status_code == 200
         assert response.request.url == url_for(
-            "book", competition=competition["name"], club=self.wrong_club_name, _external=True
+            "book",
+            competition=competition["name"],
+            club=self.wrong_club_name,
+            _external=True,
         )
         assert data.find("Something went wrong-please try again") != -1
 
-    def test_club_can_only_book_future_competition(
-        self, client, mocker
-    ):
+    def test_club_can_only_book_future_competition(self, client, mocker):
         """
         Testing the welcome template
         with one post dated competition and one valid we shoul have
@@ -95,7 +95,9 @@ class TestBooking:
         mocker.patch.object(server, "clubs", self.mocked_clubs)
         mocker.patch.object(server, "competitions", self.mocked_competitions)
 
-        response = client.post("/showSummary", data={"email": self.mocked_clubs[0]['email']})
+        response = client.post(
+            "/showSummary", data={"email": self.mocked_clubs[0]["email"]}
+        )
         data = response.data.decode()
         list_response_text = list(str(response.data).split(" "))
         print(f"{list(str(response.data).split(' '))=}")

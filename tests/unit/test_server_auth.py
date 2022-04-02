@@ -1,11 +1,8 @@
 import pytest
-
 import server
-from tests.conftest import client
 
 
 class TestLogin:
-
     def setup_method(self, method):
         self.wrong_email = "admin@irontemple.com"
         self.moked_clubs = [
@@ -22,7 +19,9 @@ class TestLogin:
         club = self.moked_clubs[0]
         response = client.post("/showSummary", data={"email": club["email"]})
 
-        self._test_root_response_code_template(response, "/showSummary", "Welcome")
+        self._test_root_response_code_template(
+            response, "/showSummary", "Welcome"
+            )
 
     def test_login_not_possible_with_wrong_email(self, client, mocker):
         """
@@ -31,7 +30,9 @@ class TestLogin:
         """
         mocker.patch.object(server, "clubs", self.moked_clubs)
 
-        response = client.post("/showSummary", data={"email": self.wrong_email})
+        response = client.post(
+            "/showSummary", data={"email": self.wrong_email}
+            )
 
         self._test_root_response_code_template(
             response, "/showSummary", "<p>Unknown email !</p>"
@@ -42,3 +43,31 @@ class TestLogin:
         assert response.status_code == 200
         assert response.request.path == root
         assert data.find(html_tag) != -1
+
+
+class TestLogout:
+    def test_logout_redirect(self, client):
+        """
+        Testing that the logout view redirect users to the index template
+        """
+        response = client.get("/logout", follow_redirects=True)
+        assert len(response.history) == 1
+        assert response.request.path == "/"
+
+
+class TestRoots:
+    @pytest.mark.parametrize(
+        "endpoint, expected_code",
+        [
+            ("/", 200),
+            ("/showSummary", 405),
+            ("/purchasePlaces", 405),
+            ("/logout", 302),
+            ("/pointsBoard", 200),
+        ],
+    )
+    def test_endpoint_accesses(self, client, endpoint, expected_code):
+        """
+        Testing responses for endpoints in cas user is not connected
+        """
+        assert client.get(endpoint).status_code == expected_code
