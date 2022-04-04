@@ -30,9 +30,14 @@ def loadCompetitions():
          return listOfCompetitions
 
 
+def update_json_data(file, data):
+    with open(file, 'w') as file:
+        json.dump(data, file, indent=4, separators=(',', ': '))
+
 
 competitions = loadCompetitions()
 clubs = loadClubs()
+
 
 @app.route('/')
 def index():
@@ -92,6 +97,14 @@ def purchasePlaces():
 
     club['points'] = int(club['points']) - (placesRequired * config.POINTS_PER_PLACE)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+
+    club_index = clubs.index(club)
+    competition_index = competitions.index(competition)
+    clubs[club_index] = club
+    competitions[competition_index] = competition
+
+    update_json_data('clubs.json', {'clubs': clubs})
+    update_json_data('competitions.json', {'competitions': competitions})
 
     flash('Great-booking complete!')
 

@@ -1,0 +1,12 @@
+POINTS_PER_PLACE = 1
+
+MAX_BOOKABLE_PLACES = 12
+
+SECRET_KEY = '#d#JCqTTW\nilK\\7m\x0bp#\tj~#H'
+
+# Active le debogueur
+DEBUG = True
+TESTING = True
+LIVESERVER_PORT = 8943
+LIVESERVER_TIMEOUT = 10
+SERVER_NAME = 'localhost:8943'
