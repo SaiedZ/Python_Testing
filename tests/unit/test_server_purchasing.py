@@ -31,6 +31,7 @@ class TestPurchasing:
         mocker.patch.object(server, "competitions", self.mocked_competitions)
         mocker.patch.object(config, "MAX_BOOKABLE_PLACES", 100)
         mocker.patch.object(config, "POINTS_PER_PLACE", 1)
+        mocker.patch("server.update_purchases", return_value=None)
 
         club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
         places_to_book = 2
@@ -63,6 +64,7 @@ class TestPurchasing:
         mocker.patch.object(server, "competitions", self.mocked_competitions)
         mocker.patch.object(config, "MAX_BOOKABLE_PLACES", 100)
         mocker.patch.object(config, "POINTS_PER_PLACE", 1)
+        mocker.patch("server.update_purchases", return_value=None)
 
         club, competition = self.mocked_clubs[0], self.mocked_competitions[1]
         places_to_book_more_than_points = 20

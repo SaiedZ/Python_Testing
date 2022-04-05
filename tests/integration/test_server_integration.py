@@ -51,6 +51,7 @@ class TestIntegrationClass:
 
         mocker.patch.object(server, "clubs", self.mocked_clubs)
         mocker.patch.object(server, "competitions", self.mocked_competitions)
+        mocker.patch("server.update_purchases", return_value=None)
 
         club = self.mocked_clubs[0]
         competition = self.mocked_competitions[1]
