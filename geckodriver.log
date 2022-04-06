@@ -372,3 +372,25 @@ console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message f
 ###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
 
 JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+1649256710765	geckodriver	INFO	Listening on 127.0.0.1:56255
+1649256713860	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56256" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileQnEPSL"
+1649256714184	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileQnEPSL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56256/devtools/browser/e2ac01a5-ef27-4dc0-b75d-cf7665f59e08
+1649256716209	Marionette	INFO	Listening on port 56262
+1649256716562	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649256720664	Marionette	INFO	Stopped listening on port 56262
+1649256721603	geckodriver	INFO	Listening on 127.0.0.1:56310
+1649256724675	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56311" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileMMRvS9"
+1649256725047	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileMMRvS9\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56311/devtools/browser/3205afd3-2f49-47f9-a4aa-2b8937d330bf
+1649256726941	Marionette	INFO	Listening on port 56316
+1649256727348	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649256727688	Marionette	INFO	Stopped listening on port 56316
+JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
