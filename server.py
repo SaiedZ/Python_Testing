@@ -154,7 +154,7 @@ def purchasePlaces():
     update_json_data("competitions.json", {'competitions': competitions})
     update_json_data("purchases.json", purchases_dict)
 
-    flash('Great-booking complete!')
+    flash("Great-booking complete!")
 
     return render_template('welcome.html', club=club, competitions=competitions)
 

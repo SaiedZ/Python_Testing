@@ -1,13 +1,10 @@
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
 
-from math import floor
-import pytest
-import server, config
+import server
 from server import loadClubs, loadCompetitions, update_json_data, load_purchases
-
-from selenium import webdriver
 
 
 clubs = loadClubs()
@@ -49,8 +46,8 @@ class TestBookingPlaces:
         enter = self.browser.find_element(by=By.TAG_NAME, value='button')
         enter.click()
         assert self.browser.current_url == "http://127.0.0.1:5000/showSummary"
-        element_h1 = self.browser.find_element(by=By.TAG_NAME, value='h1').text
-        assert element_h1 == "Welcome to the GUDLFT Registration Portal!"
+        element_p = self.browser.find_element(by=By.TAG_NAME, value='p').text
+        assert element_p == "Unknown email !"
 
     def test_signup_and_booking_places_and_logout(self, mocker):
         mocker.patch.object(server, "clubs", self.mocked_clubs)
@@ -67,7 +64,7 @@ class TestBookingPlaces:
         assert self.browser.current_url == "http://127.0.0.1:5000/showSummary"
         element_h3 = self.browser.find_element(by=By.TAG_NAME, value='h3').text
         assert element_h3 == "Competitions:"
-    '''
+
         # user chooses a competition and click on book in order to purchase places
         book_link = self.browser.find_element(by=By.XPATH, value='//ul/li[2]/a')
         book_link.click()
@@ -75,15 +72,16 @@ class TestBookingPlaces:
 
         # user books places
         number_of_places = self.browser.find_element(by=By.NAME, value='places')
-        number_of_places.send_keys('4')
+        number_of_places.send_keys(1)
         valid_booking = self.browser.find_element(by=By.TAG_NAME, value='button')
         valid_booking.click()
         display_number_of_places = self.browser.find_element(by=By.XPATH, value='//ul/li[2]').text
-        assert '9' in display_number_of_places
+        expected_number_places = str(int(competitions[1]["numberOfPlaces"]) - 1)
+        assert expected_number_places in display_number_of_places
+        element_li = self.browser.find_element(by=By.TAG_NAME, value="li").text
+        assert element_li == "Great-booking complete!"
 
         # logout user
         logout = self.browser.find_element(by=By.XPATH, value='//body/a')
         logout.click()
         assert self.browser.current_url == "http://127.0.0.1:5000/"
-      
-    '''
