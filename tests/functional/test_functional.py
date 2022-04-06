@@ -67,7 +67,9 @@ class TestLogingsPurchasingPlaces:
         assert element_h3 == "Competitions:"
 
         # connected user chooses a competition and click on book link
-        book_link = self.browser.find_element(by=By.XPATH, value="//ul/li[2]/a")
+        book_link = self.browser.find_element(
+            by=By.XPATH, value="//ul/li[2]/a"
+        )
         book_link.click()
         assert (
             self.browser.current_url

@@ -19,9 +19,7 @@ class TestLogin:
         club = self.moked_clubs[0]
         response = client.post("/showSummary", data={"email": club["email"]})
 
-        self._test_root_response_code_template(
-            response, "/showSummary", "Welcome"
-            )
+        self._test_root_response_code_template(response, "/showSummary", "Welcome")
 
     def test_login_not_possible_with_wrong_email(self, client, mocker):
         """
@@ -30,9 +28,7 @@ class TestLogin:
         """
         mocker.patch.object(server, "clubs", self.moked_clubs)
 
-        response = client.post(
-            "/showSummary", data={"email": self.wrong_email}
-            )
+        response = client.post("/showSummary", data={"email": self.wrong_email})
 
         self._test_root_response_code_template(
             response, "/showSummary", "<p>Unknown email !</p>"
