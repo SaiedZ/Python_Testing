@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
 
-from server import load_clubs, load_competitions, load_purchases
-from server import update_json_data
+from data.data_utils import load_clubs, load_competitions, load_purchases
+from data.data_utils import update_json_data
 
 clubs = load_clubs()
 competitions = load_competitions()
@@ -34,9 +34,10 @@ class TestLogingsPurchasingPlaces:
         the json files: clubs, competitions, purchases
         """
         self.browser.close()
-        update_json_data("clubs.json", {"clubs": clubs})
-        update_json_data("competitions.json", {"competitions": competitions})
-        update_json_data("purchases.json", purchases)
+        update_json_data("data/clubs.json", {"clubs": clubs})
+        update_json_data("data/competitions.json",
+                         {"competitions": competitions})
+        update_json_data("data/purchases.json", purchases)
 
     def test_login_with_wrong_email(self):
         """

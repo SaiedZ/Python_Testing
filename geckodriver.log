@@ -736,3 +736,149 @@ JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't fin
 JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
 console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
 1649332956074	Marionette	INFO	Stopped listening on port 63953
+1649352591889	geckodriver	INFO	Listening on 127.0.0.1:57130
+1649352594951	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "57131" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofile3a2VMi"
+1649352595459	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofile3a2VMi\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57131/devtools/browser/c04ca73c-1385-4916-b27d-e031af936062
+1649352597951	Marionette	INFO	Listening on port 57137
+1649352598116	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649352598393	Marionette	INFO	Stopped listening on port 57137
+1649352599204	geckodriver	INFO	Listening on 127.0.0.1:57164
+1649352602232	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "57165" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileODqprg"
+1649352602589	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileODqprg\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57165/devtools/browser/6735aeb9-d76d-4b4c-8ddc-b0439358b870
+1649352604932	Marionette	INFO	Listening on port 57172
+1649352605394	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649352605812	Marionette	INFO	Stopped listening on port 57172
+1649353595627	geckodriver	INFO	Listening on 127.0.0.1:52997
+1649353598686	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52998" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileWUIQxS"
+1649353599036	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileWUIQxS\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52998/devtools/browser/c08d5290-5e73-4787-9d92-8a68f5695ab7
+1649353600932	Marionette	INFO	Listening on port 53004
+1649353601374	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353601842	Marionette	INFO	Stopped listening on port 53004
+JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+1649353602438	geckodriver	INFO	Listening on 127.0.0.1:53039
+1649353605477	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53040" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilemIdmOL"
+1649353605816	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilemIdmOL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53040/devtools/browser/c47ba0cb-ed8b-490a-8a83-08f41480d9fa
+1649353608016	Marionette	INFO	Listening on port 53047
+1649353608151	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353608854	Marionette	INFO	Stopped listening on port 53047
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1649353660393	geckodriver	INFO	Listening on 127.0.0.1:53122
+1649353663420	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53123" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilefupwAv"
+1649353663795	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilefupwAv\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53123/devtools/browser/5e26a391-5c6c-46c0-9fb4-542c268812ee
+1649353665777	Marionette	INFO	Listening on port 53129
+1649353666079	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353666280	Marionette	INFO	Stopped listening on port 53129
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+1649353667110	geckodriver	INFO	Listening on 127.0.0.1:53162
+1649353670200	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53163" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileAVZ55V"
+1649353670557	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileAVZ55V\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53163/devtools/browser/859b060b-34a4-442c-ae45-b40c9f6a3148
+1649353672604	Marionette	INFO	Listening on port 53173
+1649353672879	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353673300	Marionette	INFO	Stopped listening on port 53173
+JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1649353732346	geckodriver	INFO	Listening on 127.0.0.1:53253
+1649353735400	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53254" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileGdAU65"
+1649353735697	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileGdAU65\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53254/devtools/browser/9d60bd51-7b83-45e9-9107-f24b0907d3d8
+1649353737406	Marionette	INFO	Listening on port 53261
+1649353737460	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353737675	Marionette	INFO	Stopped listening on port 53261
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1649353738351	geckodriver	INFO	Listening on 127.0.0.1:53288
+1649353741410	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53289" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileuJQboe"
+1649353741745	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileuJQboe\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53289/devtools/browser/32a86b39-305a-4623-93ad-f95471423914
+1649353743487	Marionette	INFO	Listening on port 53296
+1649353743580	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353743979	Marionette	INFO	Stopped listening on port 53296
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1649353766281	geckodriver	INFO	Listening on 127.0.0.1:53347
+1649353769363	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53348" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileaxzvad"
+1649353769683	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileaxzvad\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53348/devtools/browser/e7f83951-e4f6-490a-a7a8-bcb5dfd84cfa
+1649353771609	Marionette	INFO	Listening on port 53354
+1649353772032	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1649353776640	Marionette	INFO	Stopped listening on port 53354
+1649353777247	geckodriver	INFO	Listening on 127.0.0.1:53404
+1649353780344	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53405" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilelcjPSZ"
+1649353780656	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofilelcjPSZ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53405/devtools/browser/96b0c155-2fa1-476b-a3a5-fb163d46efff
+1649353782415	Marionette	INFO	Listening on port 53411
+1649353782507	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1649353786984	Marionette	INFO	Stopped listening on port 53411
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1649353792233	geckodriver	INFO	Listening on 127.0.0.1:53466
+1649353795295	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53467" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileVQEmow"
+1649353795613	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileVQEmow\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53467/devtools/browser/4a83c9aa-2e89-4ec0-8c3f-5083bf92f14e
+1649353797280	Marionette	INFO	Listening on port 53474
+1649353797358	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353797553	Marionette	INFO	Stopped listening on port 53474
+1649353798210	geckodriver	INFO	Listening on 127.0.0.1:53501
+1649353801310	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53502" "-no-remote" "-profile" "C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileNUj8YG"
+1649353801684	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\saied\\AppData\\Local\\Temp\\rust_mozprofileNUj8YG\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53502/devtools/browser/8581f11d-714d-4d5c-8c8d-46d5d26f0897
+1649353803825	Marionette	INFO	Listening on port 53509
+1649353803980	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://127.0.0.1:5000"
+1649353804361	Marionette	INFO	Stopped listening on port 53509
+JavaScript error: resource://gre/modules/TerminatorTelemetry.jsm, line 71: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
