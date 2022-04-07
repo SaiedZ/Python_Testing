@@ -1,6 +1,5 @@
 import server
 import config
-from tests.conftest import mocked_clubs, mocked_competitions
 
 
 class TestIntegrationClass:
@@ -42,8 +41,8 @@ class TestIntegrationClass:
 
         mocker.patch.object(server, "clubs", mocked_clubs)
         mocker.patch.object(server, "competitions", mocked_competitions)
-        mocker.patch("server.update_purchases", return_value=None)
-        mocker.patch("server.update_json_data", return_value=None)
+        mocker.patch("data.data_utils.update_purchases", return_value=None)
+        mocker.patch("data.data_utils.update_json_data", return_value=None)
 
         club = mocked_clubs[0]
         competition = mocked_competitions[1]

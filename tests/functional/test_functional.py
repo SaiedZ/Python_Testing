@@ -2,11 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
 
-from server import loadClubs, loadCompetitions, load_purchases
+from server import load_clubs, load_competitions, load_purchases
 from server import update_json_data
 
-clubs = loadClubs()
-competitions = loadCompetitions()
+clubs = load_clubs()
+competitions = load_competitions()
 purchases = load_purchases()
 
 

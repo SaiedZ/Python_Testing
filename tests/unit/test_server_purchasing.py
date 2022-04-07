@@ -16,8 +16,8 @@ class TestPurchasing:
         mocker.patch.object(server, "competitions", mocked_competitions)
         mocker.patch.object(config, "MAX_BOOKABLE_PLACES", 100)
         mocker.patch.object(config, "POINTS_PER_PLACE", 1)
-        mocker.patch("server.update_purchases", return_value=None)
-        mocker.patch("server.update_json_data", return_value=None)
+        mocker.patch("data.data_utils.update_purchases", return_value=None)
+        mocker.patch("data.data_utils.update_json_data", return_value=None)
 
         places_to_book = 2
         expected_remaining_places = \
