@@ -3,7 +3,9 @@ import math
 from flask import Flask, render_template, request, redirect, flash, url_for
 
 import config
-from utils import compare_str_date_to_now
+from utils import (compare_str_date_to_now,
+                   update_purchases_data,
+                   verrify_condition_are_satisfied_to_purchase_places)
 from data import data_utils
 
 app = Flask(__name__)
@@ -23,10 +25,17 @@ def index():
 
 @app.route("/showSummary", methods=["POST"])
 def showSummary():
-    if [club for club in clubs if club["email"] == request.form["email"]]:
-        club = [club for club in clubs if club["email"] == request.form["email"]][0]
-        return render_template("welcome.html", club=club, competitions=competitions)
-    else:
+    """
+    Return the welcome template for known email or
+    display an error message
+    """
+    try:
+        return render_template(
+            "welcome.html",
+            club=[club for club in clubs if club["email"] ==
+                  request.form["email"]][0],
+            competitions=competitions)
+    except IndexError:
         flash("Unknown email !", "error")
         return render_template("index.html")
 
@@ -34,21 +43,23 @@ def showSummary():
 @app.route("/book/<competition>/<club>")
 def book(competition, club):
     try:
-        foundClub = [c for c in clubs if c["name"] == club][0]
-        foundCompetition = [c for c in competitions if c["name"] == competition][0]
+        club = [c for c in clubs if c["name"] == club][0]
+        competition = \
+            [c for c in competitions if c["name"] == competition][0]
     except IndexError:
         flash("Something went wrong-please try again")
-        return render_template("welcome.html", club=club, competitions=competitions)
+        return render_template("welcome.html", club=club,
+                               competitions=competitions)
 
     max_places_to_book = min(
-        math.floor(int(foundClub["points"]) / config.POINTS_PER_PLACE),
-        int(foundCompetition["numberOfPlaces"]),
+        math.floor(int(club["points"]) / config.POINTS_PER_PLACE),
+        int(competition["numberOfPlaces"]),
         config.MAX_BOOKABLE_PLACES,
     )
     return render_template(
         "booking.html",
-        club=foundClub,
-        competition=foundCompetition,
+        club=club,
+        competition=competition,
         max_places_to_book=max_places_to_book,
     )
 
@@ -56,67 +67,41 @@ def book(competition, club):
 @app.route("/purchasePlaces", methods=["POST"])
 def purchasePlaces():
 
-    competition = [c for c in competitions if c["name"] == request.form["competition"]][
-        0
-    ]
-    club = [c for c in clubs if c["name"] == request.form["club"]][0]
-    club_index = clubs.index(club)
+    competition = \
+        [competition for competition in competitions if competition["name"] ==
+         request.form["competition"]][0]
     competition_index = competitions.index(competition)
+
+    club = [club for club in clubs if club["name"] == request.form["club"]][0]
+    club_index = clubs.index(club)
+
     places_required = int(request.form["places"])
-    places_already_bought = data_utils.load_competition_places_purchased_by_club(club, competition)
+    places_already_bought = \
+        data_utils.load_competition_places_purchased_by_club(club, competition)
 
-    problem_to_purchase = False
+    condition_satisfied = verrify_condition_are_satisfied_to_purchase_places(
+        competition, club, places_required, places_already_bought, request)
 
-    if compare_str_date_to_now(competition["date"]):
-        flash("You can't book a place on a post-dated competition! ")
-        problem_to_purchase = True
+    if not condition_satisfied:
+        return render_template("booking.html", club=club,
+                               competition=competition)
 
-    if int(request.form["places"]) <= 0:
-        flash("Places to book should be an integer > 0")
-        problem_to_purchase = True
-
-    if places_already_bought >= config.MAX_BOOKABLE_PLACES:
-        flash("You already booked the maximum of places for this competition! ")
-        problem_to_purchase = True
-
-    max_places_to_book = math.floor(int(club["points"]) / config.POINTS_PER_PLACE)
-
-    if places_required > max_places_to_book:
-        flash("You don't have enough points ! ")
-        problem_to_purchase = True
-
-    if places_required > int(competition["numberOfPlaces"]):
-        flash("You can't book more places than available ! ")
-        problem_to_purchase = True
-
-    if (places_required + places_already_bought) > config.MAX_BOOKABLE_PLACES:
-        flash(
-            f"You are not allowed to purchase more than {config.MAX_BOOKABLE_PLACES} places ! "
-        )
-        flash(f"You already bougth {places_already_bought} for this competition! ")
-        problem_to_purchase = True
-
-    if problem_to_purchase:
-        return render_template("booking.html", club=club, competition=competition)
-
-    club["points"] = int(club["points"]) - (places_required * config.POINTS_PER_PLACE)
-    competition["numberOfPlaces"] = int(competition["numberOfPlaces"]) - places_required
+    club["points"] = \
+        int(club["points"]) - (places_required * config.POINTS_PER_PLACE)
+    competition["numberOfPlaces"] = \
+        int(competition["numberOfPlaces"]) - places_required
 
     clubs[club_index] = club
     competitions[competition_index] = competition
-    data_utils.update_purchases(
-        purchases_dict,
-        club["email"],
-        competition["name"],
-        places_already_bought + places_required,
-    )
-    data_utils.update_json_data("data/clubs.json", {"clubs": clubs})
-    data_utils.update_json_data("data/competitions.json", {"competitions": competitions})
-    data_utils.update_json_data("data/purchases.json", purchases_dict)
+
+    update_purchases_data(competition, club, places_required,
+                          places_already_bought, purchases_dict,
+                          clubs, competitions)
 
     flash("Great-booking complete!")
 
-    return render_template("welcome.html", club=club, competitions=competitions)
+    return render_template("welcome.html", club=club,
+                           competitions=competitions)
 
 
 @app.route("/pointsBoard", methods=["GET"])
