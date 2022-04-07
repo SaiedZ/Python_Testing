@@ -1,106 +1,89 @@
 from flask import url_for
-import pytest
 
 import server
-from server import book
-from tests.conftest import client
 
 
 class TestBooking:
+
     def setup_method(self, method):
+        """
+        This is used to be able to use the url_for.
+        """
         self.app = server.app
-        self.mocked_clubs = [
-            {"name": "Simp Ly", "email": "john@simplylift.co", "points": "13"},
-        ]
-        self.mocked_competitions = [
-            {
-                "name": "Spring Festival",
-                "date": "2020-03-27 10:00:00",
-                "numberOfPlaces": "25",
-            },
-            {
-                "name": "Fall Classic",
-                "date": "2026-10-22 13:30:00",
-                "numberOfPlaces": "13",
-            },
-        ]
-        self.wrong_club_name = "Does Not Exist"
         self.app_context = self.app.test_request_context()
         self.app_context.push()  # push it
 
     def tearDown(self):
+        """
+        Pop the test_request_context() that was added in the
+        setup_method
+        """
         self.context.pop()  # pop it
 
     def test_book_view_should_return_booking_template_if_club_competition(
-        self, client, mocker
+        self, client, mocker, mocked_clubs, mocked_competitions,
+        test_club, not_postdated_competition
     ):
         """
         Testing if by using an existing club and competition the app will show
         the content of the booking.html template
         """
-        mocker.patch.object(server, "clubs", self.mocked_clubs)
-        mocker.patch.object(server, "competitions", self.mocked_competitions)
+        mocker.patch.object(server, "clubs", mocked_clubs)
+        mocker.patch.object(server, "competitions", mocked_competitions)
 
-        club, competition = self.mocked_clubs[0], self.mocked_competitions[0]
-        response = client.get(
-            url_for(
-                "book",
-                competition=competition["name"],
-                club=club["name"],
-                _external=False,
-            )
+        url_to_test = url_for(
+            "book",
+            competition=not_postdated_competition["name"],
+            club=test_club["name"],
+            _external=True,
         )
-
+        response = client.get(url_to_test)
         data = response.data.decode()
 
         assert response.status_code == 200
-        assert response.request.url == url_for(
-            "book", competition=competition["name"], club=club["name"], _external=True
-        )
+        assert response.request.url == url_to_test
         assert data.find("Places available:") != -1
 
     def test_book_view_should_return_error_if_not_club_or_competition(
-        self, client, mocker
+        self, client, mocker, mocked_clubs, wrong_club,
+        mocked_competitions, not_postdated_competition
     ):
-        mocker.patch.object(server, "clubs", self.mocked_clubs)
-        mocker.patch.object(server, "competitions", self.mocked_competitions)
+        """
+        Testing if by using a wrong club the app will show
+        an error message
+        """
+        mocker.patch.object(server, "clubs", mocked_clubs)
+        mocker.patch.object(server, "competitions", mocked_competitions)
 
-        competition = self.mocked_competitions[0]
-        response = client.get(
-            url_for(
-                "book",
-                competition=competition["name"],
-                club=self.wrong_club_name,
-                _external=False,
-            )
+        url_to_test = url_for(
+            "book",
+            competition=not_postdated_competition["name"],
+            club=wrong_club['name'],
+            _external=True,
         )
-
+        response = client.get(url_to_test)
         data = response.data.decode()
 
         assert response.status_code == 200
-        assert response.request.url == url_for(
-            "book",
-            competition=competition["name"],
-            club=self.wrong_club_name,
-            _external=True,
-        )
+        assert response.request.url == url_to_test
         assert data.find("Something went wrong-please try again") != -1
 
-    def test_club_can_only_book_future_competition(self, client, mocker):
+    def test_club_can_only_book_future_competition(
+        self, client, mocker, mocked_clubs,
+        test_club, mocked_competitions
+    ):
         """
         Testing the welcome template
         with one post dated competition and one valid we shoul have
         only one link with "book places"
         """
-        mocker.patch.object(server, "clubs", self.mocked_clubs)
-        mocker.patch.object(server, "competitions", self.mocked_competitions)
+        mocker.patch.object(server, "clubs", mocked_clubs)
+        mocker.patch.object(server, "competitions", mocked_competitions)
 
         response = client.post(
-            "/showSummary", data={"email": self.mocked_clubs[0]["email"]}
+            "/showSummary", data={"email": test_club["email"]}
         )
-        data = response.data.decode()
         list_response_text = list(str(response.data).split(" "))
-        print(f"{list(str(response.data).split(' '))=}")
         occurence_book_response = list_response_text.count("Book")
         assert response.status_code == 200
         assert occurence_book_response == 1
