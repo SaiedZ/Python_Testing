@@ -1,6 +1,7 @@
 import math
 
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import (Flask, render_template, request,
+                   redirect, flash, url_for)
 
 import config
 from utils import (compare_str_date_to_now,
