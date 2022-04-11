@@ -7,8 +7,8 @@ class PerformanceTest(HttpUser):
         self.client.get("")
 
     @task
-    def pointsBoard(self):
-        self.client.get("pointsBoard")
+    def points_board(self):
+        self.client.get("points_board")
 
     @task
     def summary(self):

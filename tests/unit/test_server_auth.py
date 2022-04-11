@@ -59,7 +59,7 @@ class TestRoots:
             ("/showSummary", 405),
             ("/purchasePlaces", 405),
             ("/logout", 302),
-            ("/pointsBoard", 200),
+            ("/points_board", 200),
         ],
     )
     def test_endpoint_accesses(self, client, endpoint, expected_code):

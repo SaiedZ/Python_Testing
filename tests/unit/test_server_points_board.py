@@ -1,7 +1,7 @@
 import server
 
 
-class TestPointsBoard:
+class Testpoints_board:
 
     def test_should_access_home(self, client):
         """
@@ -13,11 +13,11 @@ class TestPointsBoard:
         self, client, mocker, mocked_clubs
     ):
         """
-        Test the reponse for the /pointsBoard page and
+        Test the reponse for the /points_board page and
         that club and theire points are displayed.
         """
         mocker.patch.object(server, "clubs", mocked_clubs)
-        response = client.get("/pointsBoard")
+        response = client.get("/points_board")
         assert response.status_code == 200
         data = response.data.decode()
         for club in mocked_clubs:
