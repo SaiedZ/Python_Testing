@@ -1,25 +1,31 @@
+"""This module contains utils for managing json data."""
+
 import json
 
 
 def load_clubs():
+    """Returns the list of clubs from the json file."""
     with open("data/clubs.json") as c:
         listOfClubs = json.load(c)["clubs"]
         return listOfClubs
 
 
 def load_competitions():
+    """Returns the list of competitions from the json file."""
     with open("data/competitions.json") as comps:
         listOfCompetitions = json.load(comps)["competitions"]
         return listOfCompetitions
 
 
 def load_purchases():
+    """Returns a dict of purchases from the json file."""
     with open("data/purchases.json") as purchases_file:
         purchases_dict = json.load(purchases_file)
         return purchases_dict
 
 
 def load_competition_places_purchased_by_club(club, competition):
+    """Return the number of purchaed places by a club for a given competition."""
     club_email = club["email"]
     competition_name = competition["name"]
     purchases_dict = load_purchases()
@@ -32,6 +38,7 @@ def load_competition_places_purchased_by_club(club, competition):
 
 
 def update_json_data(file, data):
+    """Updates a json files."""
     with open(file, "w") as file:
         json.dump(data, file, indent=4, separators=(",", ": "))
 
