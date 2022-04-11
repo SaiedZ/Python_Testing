@@ -1,3 +1,5 @@
+"""This module contains the views and some settings of the application"""
+
 import math
 
 from flask import (Flask, render_template, request,
@@ -14,6 +16,7 @@ app.secret_key = "something_special"
 app.config.from_object("config")
 app.jinja_env.filters["past_date"] = compare_str_date_to_now
 
+# loading data from json files
 competitions = data_utils.load_competitions()
 clubs = data_utils.load_clubs()
 purchases_dict = data_utils.load_purchases()
@@ -21,14 +24,14 @@ purchases_dict = data_utils.load_purchases()
 
 @app.route("/")
 def index():
+    """Renders template index, homepage."""
     return render_template("index.html")
 
 
 @app.route("/showSummary", methods=["POST"])
 def showSummary():
-    """
-    Return the welcome template for known email or
-    display an error message
+    """Renders the welcome template for known email.
+    If the email is not known, it displays an error message.
     """
     try:
         return render_template(
@@ -43,6 +46,11 @@ def showSummary():
 
 @app.route("/book/<competition>/<club>")
 def book(competition, club):
+    """Render the booking template if the club's nam and
+    competition's name in the url exist.
+    Otherwise, il will display the welcome template with
+    an error message.
+    """
     try:
         club = [c for c in clubs if c["name"] == club][0]
         competition = \
@@ -67,12 +75,22 @@ def book(competition, club):
 
 @app.route("/purchasePlaces", methods=["POST"])
 def purchasePlaces():
-
+    """Manage the purchasing od places by clubs.
+    
+    If conditions are satisfied, the club can purchase
+    the required number of places. Then, the welcome template
+    will be displayer with a success message.
+    
+    If conditions are not satisfied, the booking template will
+    be displayed with a failure message.
+    """
+    # get the competition from competitions and its index
     competition = \
         [competition for competition in competitions if competition["name"] ==
          request.form["competition"]][0]
     competition_index = competitions.index(competition)
 
+    # get the club from clubs and its index
     club = [club for club in clubs if club["name"] == request.form["club"]][0]
     club_index = clubs.index(club)
 
@@ -80,6 +98,7 @@ def purchasePlaces():
     places_already_bought = \
         data_utils.load_competition_places_purchased_by_club(club, competition)
 
+    # verrify if conditions to buy places are satisfied
     condition_satisfied = verrify_condition_are_satisfied_to_purchase_places(
         competition, club, places_required, places_already_bought, request)
 
@@ -87,6 +106,7 @@ def purchasePlaces():
         return render_template("booking.html", club=club,
                                competition=competition)
 
+    # updating club's points, competition's places and bought places
     club["points"] = \
         int(club["points"]) - (places_required * config.POINTS_PER_PLACE)
     competition["numberOfPlaces"] = \
@@ -105,11 +125,13 @@ def purchasePlaces():
                            competitions=competitions)
 
 
-@app.route("/pointsBoard", methods=["GET"])
-def pointsBoard():
+@app.route("/points_board", methods=["GET"])
+def points_board():
+    """Render the template for displaying the points board."""
     return render_template("points_board.html", clubs=clubs)
 
 
 @app.route("/logout")
 def logout():
+    """Logout the club by rendering the index page."""
     return redirect(url_for("index"))
