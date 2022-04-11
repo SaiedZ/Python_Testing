@@ -1,3 +1,5 @@
+"""This module contains integration tests."""
+
 import server
 import config
 
@@ -5,6 +7,7 @@ import config
 class TestIntegrationClass:
 
     def setup_method(self, method):
+        """Tis is required to use the url_for method."""
         self.app = server.app
         self.app_context = self.app.test_request_context()
         self.app_context.push()  # push it
