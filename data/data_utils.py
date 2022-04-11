@@ -48,7 +48,7 @@ def update_purchases(purchases_dict, club_email, competition_name, value):
     Updates purchases to avoid keyerrors when a club buy places
     for a competition for the first time.
     """
-    if club_email in purchases_dict and competition_name in purchases_dict:
-        purchases_dict[club_email][competition_name] = value
+    if club_email in purchases_dict:
+            purchases_dict[club_email][competition_name] = value
     else:
         purchases_dict[club_email] = {competition_name: value}
