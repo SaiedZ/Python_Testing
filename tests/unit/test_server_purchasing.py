@@ -1,3 +1,5 @@
+"""This module contains unit tests for purchasing."""
+
 import server
 import config
 
@@ -138,4 +140,31 @@ class TestPurchasing:
             data.find(
                 "You can&#39;t book a place on a post-dated competition! "
                 ) != -1
+        )
+
+    def test_purshasing_should_not_work_if_negatif_number_places(
+        self, client, mocker, mocked_clubs, mocked_competitions,
+        test_club, not_postdated_competition,
+    ):
+        """
+        Testing if purshasing doesn't work if the number of places is negatif.
+        """
+        mocker.patch.object(server, "clubs", mocked_clubs)
+        mocker.patch.object(server, "competitions", mocked_competitions)
+
+        response = client.post(
+            "/purchasePlaces",
+            data={
+                "competition": not_postdated_competition["name"],
+                "club": test_club["name"],
+                "places": -1,
+            },
+        )
+        data = response.data.decode()
+
+        assert (
+            data.find(
+                "Places to book should be an integer &gt; 0"
+            )
+            != -1
         )
