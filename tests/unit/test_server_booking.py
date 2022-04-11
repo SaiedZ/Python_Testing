@@ -1,3 +1,5 @@
+"""This module contains unit tests for booking."""
+
 from flask import url_for
 
 import server

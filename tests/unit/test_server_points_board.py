@@ -1,3 +1,5 @@
+"""This module contains unit tests for points board."""
+
 import server
 
 
